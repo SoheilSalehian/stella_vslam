@@ -234,4 +234,5 @@ RUN set -x && \
   chmod -R 777 ./*
 
 WORKDIR /stella_vslam/build/
+RUN curl -sL "https://github.com/stella-cv/FBoW_orb_vocab/raw/main/orb_vocab.fbow" -o orb_vocab.fbow
 ENTRYPOINT ["/bin/bash"]
