@@ -1,6 +1,13 @@
 FROM ubuntu:18.04
 ENV DEBIAN_FRONTEND noninteractive
 
+ARG USER_ID
+ARG GROUP_ID
+
+RUN addgroup --gid $GROUP_ID user
+RUN adduser --disabled-password --gecos '' --uid $USER_ID --gid $GROUP_ID user
+USER user
+
 # install dependencies via apt
 ENV DEBCONF_NOWARNINGS yes
 RUN set -x && \
@@ -15,6 +22,7 @@ RUN set -x && \
     wget \
     curl \
     tar \
+    python3-pip \
     unzip && \
   : "g2o dependencies" && \
   apt-get install -y -qq \
@@ -46,6 +54,8 @@ RUN set -x && \
   : "remove cache" && \
   apt-get autoremove -y -qq && \
   rm -rf /var/lib/apt/lists/*
+
+RUN pip3 install msgpack
 
 RUN apt-get remove cmake -y -qq
 
@@ -235,4 +245,3 @@ RUN set -x && \
 
 WORKDIR /stella_vslam/build/
 RUN curl -sL "https://github.com/stella-cv/FBoW_orb_vocab/raw/main/orb_vocab.fbow" -o orb_vocab.fbow
-ENTRYPOINT ["/bin/bash"]
