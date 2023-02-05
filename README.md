@@ -1,3 +1,15 @@
+# How to run with `Make`
+
+## Building
+`make build`
+
+## Running video file
+1. Copy video file to `data/` folder
+2. `FILE=./data/YOUR_VIDEO_FILE.mp4 make run`
+
+## Results
+Inside the data folder you should find the msg file and a pointcloud (text file in CSV format).
+
 # stella_vslam
 
 [![CI](https://github.com/stella-cv/stella_vslam/actions/workflows/main.yml/badge.svg)](https://github.com/stella-cv/stella_vslam/actions/workflows/main.yml)
