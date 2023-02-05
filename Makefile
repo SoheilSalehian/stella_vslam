@@ -2,7 +2,7 @@ NPROCS:=$(shell grep -c ^processor /proc/cpuinfo)
 export NPROCS
 
 build:
-	docker build -t stella_vslam-desktop -f Dockerfile.desktop --build-arg USER_ID=$(id -u) --build-arg GROUP_ID=$(id -g) . --build-arg NUM_THREADS=$(NPROCS)
+	docker build -t stella_vslam-desktop -f Dockerfile.desktop . --build-arg NUM_THREADS=$(NPROCS)
 	curl -sL "https://github.com/stella-cv/FBoW_orb_vocab/raw/main/orb_vocab.fbow" -o orb_vocab.fbow
 
 run:
